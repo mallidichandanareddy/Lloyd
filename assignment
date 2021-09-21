@@ -1,0 +1,38 @@
+let paragraph='This is a good story but we add more crazy stuff into it. So more users will be clicking on our ads who the hell cares those stupid people, come on start making crazy stuff. Also what the hell is wrong about our politics inside the india ! Those morons are useless also they make stupid rules that were bound to follow and i hate that crap. ';
+
+// Splitting paragraph using regular expression
+let sentences=paragraph.split(/[!,?,.]/); 
+
+// To remove empty quotes (" ")
+sentences=sentences.filter(sentence=>sentence);
+
+const slursArray = ["bad","hell","crazy","crap","hate","stupid","useless"];
+
+// Iterating through individual sentences of the paragraph
+for (let i=0; i<sentences.length; i++){
+
+//Converting individual sentences into an Array (eg:["this","is","a","good"])
+  let sentence=sentences[i].split(" ").filter(data=>data);
+  
+  const matchedString=[];
+  
+  //Iterating through string array
+     slursArray.forEach((string)=>{
+         
+    // Matched strings will be stored here     
+     let requiredStrings=[] ;
+     
+     //Comparing the sentences array with required array and taking out the matched string
+       requiredStrings=sentence.filter((sen)=>string.toLowerCase()==sen.toLowerCase());
+       
+       //Pushed the matched strings into array
+       requiredStrings.length>0 && matchedString.push(requiredStrings[0]);
+});
+
+  if(matchedString.length>0){
+    console.log(`Sentence ${i}:${sentences[i]}`);
+    console.log(`Slur count :${matchedString.length}`);
+    let percentage=(matchedString.length/sentence.length)*100;
+    console.log(`Slur Percentage:${Math.trunc(percentage)}%`);
+ }
+}
